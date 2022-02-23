@@ -6,6 +6,7 @@ import { createHtmlPlugin } from 'vite-plugin-html';
 import viteRestart from 'vite-plugin-restart'
 import viteCompression from 'vite-plugin-compression';
 import viteImagemin from 'vite-plugin-imagemin';
+import visualizer from 'rollup-plugin-visualizer';
 
 const resolve = (dir: string) => path.resolve(__dirname, dir)
 
@@ -34,6 +35,15 @@ export default ({mode, command}: ConfigEnv):UserConfig => {
         ]
       }),
     ]
+    const seeVisualizer = false // 如果要看打包后的分析
+    if (seeVisualizer) {
+      plugins.push(visualizer({
+        filename: './node_modules/.cache/visualizer/stats.html',
+        open: true,
+        gzipSize: true,
+        brotliSize: true,
+      }))
+    }
     if (isBuild) {
       plugins.push(viteCompression())
       const isSupportBrotli = false // 如果服务器支持 brotli 压缩可以开启，改方式相比 gzip 体积更小
