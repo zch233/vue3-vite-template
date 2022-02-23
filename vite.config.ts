@@ -4,6 +4,7 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 import * as path from 'path';
 import { createHtmlPlugin } from 'vite-plugin-html';
 import ViteRestart from 'vite-plugin-restart'
+import viteCompression from 'vite-plugin-compression';
 
 const resolve = (dir: string) => path.resolve(__dirname, dir)
 
@@ -15,6 +16,7 @@ export default ({mode, command}: ConfigEnv):UserConfig => {
     plugins: [
       vue(),
       vueJsx(),
+      viteCompression(),
       createHtmlPlugin({
         minify: isBuild,
         inject: {
@@ -29,7 +31,7 @@ export default ({mode, command}: ConfigEnv):UserConfig => {
           '*.config.[jt]s',
           '**/config/*.[jt]s'
         ]
-      })
+      }),
     ],
     resolve: {
       alias: {
