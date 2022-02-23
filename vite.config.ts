@@ -5,6 +5,7 @@ import * as path from 'path';
 import { createHtmlPlugin } from 'vite-plugin-html';
 import viteRestart from 'vite-plugin-restart'
 import viteCompression from 'vite-plugin-compression';
+import viteImagemin from 'vite-plugin-imagemin';
 
 const resolve = (dir: string) => path.resolve(__dirname, dir)
 
@@ -13,6 +14,7 @@ export default ({mode, command}: ConfigEnv):UserConfig => {
   const {VITE_APP_TITLE, VITE_APP_API_URL,VITE_APP_API_URL_PROXY} = loadEnv(mode, process.cwd())
   const isBuild = command === 'build';
   const createVitePlugins = () => {
+    // https://github.com/vitejs/awesome-vite#plugins
     const plugins = [
       vue(),
       vueJsx(),
@@ -41,6 +43,33 @@ export default ({mode, command}: ConfigEnv):UserConfig => {
           algorithm: 'brotliCompress',
         }),
       );
+      plugins.push(viteImagemin({
+        gifsicle: {
+          optimizationLevel: 7,
+          interlaced: false,
+        },
+        optipng: {
+          optimizationLevel: 7,
+        },
+        mozjpeg: {
+          quality: 20,
+        },
+        pngquant: {
+          quality: [0.8, 0.9],
+          speed: 4,
+        },
+        svgo: {
+          plugins: [
+            {
+              name: 'removeViewBox',
+            },
+            {
+              name: 'removeEmptyAttrs',
+              active: false,
+            },
+          ],
+        },
+      }))
     }
     return plugins
   }
