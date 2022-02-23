@@ -4,8 +4,9 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build",
-    "preview": "vite preview"
+    "build": "vite build",
+    "preview": "yarn build && vite preview",
+    "type:check": "vue-tsc --noEmit --skipLibCheck"
   },
   "dependencies": {
     "vue": "^3.2.25"
