@@ -3,6 +3,7 @@ import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import * as path from 'path';
 import { createHtmlPlugin } from 'vite-plugin-html';
+import ViteRestart from 'vite-plugin-restart'
 
 const resolve = (dir: string) => path.resolve(__dirname, dir)
 
@@ -22,6 +23,12 @@ export default ({mode, command}: ConfigEnv):UserConfig => {
             title: VITE_APP_TITLE,
           },
         },
+      }),
+      ViteRestart({
+        restart: [
+          '*.config.[jt]s',
+          '**/config/*.[jt]s'
+        ]
       })
     ],
     resolve: {
