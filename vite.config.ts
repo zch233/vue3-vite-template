@@ -28,6 +28,22 @@ export default ({mode, command}: ConfigEnv):UserConfig => {
       alias: {
         "@src": resolve('./src'),
       }
-    }
+    },
+    build: {
+      target: 'es2015',
+      cssTarget: 'chrome80',
+      chunkSizeWarningLimit: 2000,
+      terserOptions: {
+        compress: {
+          keep_infinity: true,
+          drop_console: isBuild,
+        },
+      },
+      rollupOptions: {
+        // 确保外部化处理那些你不想打包进库的依赖
+        external: [],
+        // https://rollupjs.org/guide/en/#big-list-of-options
+      },
+    },
   }
 }
