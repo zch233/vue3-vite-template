@@ -3,7 +3,7 @@ import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import * as path from 'path';
 import { createHtmlPlugin } from 'vite-plugin-html';
-import ViteRestart from 'vite-plugin-restart'
+import viteRestart from 'vite-plugin-restart'
 import viteCompression from 'vite-plugin-compression';
 
 const resolve = (dir: string) => path.resolve(__dirname, dir)
@@ -12,11 +12,10 @@ const resolve = (dir: string) => path.resolve(__dirname, dir)
 export default ({mode, command}: ConfigEnv):UserConfig => {
   const {VITE_APP_TITLE, VITE_APP_API_URL,VITE_APP_API_URL_PROXY} = loadEnv(mode, process.cwd())
   const isBuild = command === 'build';
-  return {
-    plugins: [
+  const createVitePlugins = () => {
+    const plugins = [
       vue(),
       vueJsx(),
-      viteCompression(),
       createHtmlPlugin({
         minify: isBuild,
         inject: {
@@ -26,13 +25,27 @@ export default ({mode, command}: ConfigEnv):UserConfig => {
           },
         },
       }),
-      ViteRestart({
+      viteRestart({
         restart: [
           '*.config.[jt]s',
           '**/config/*.[jt]s'
         ]
       }),
-    ],
+    ]
+    if (isBuild) {
+      plugins.push(viteCompression())
+      const isSupportBrotli = false // 如果服务器支持 brotli 压缩可以开启，改方式相比 gzip 体积更小
+      isSupportBrotli && plugins.push(
+        viteCompression({
+          ext: '.br',
+          algorithm: 'brotliCompress',
+        }),
+      );
+    }
+    return plugins
+  }
+  return {
+    plugins: createVitePlugins(),
     resolve: {
       alias: {
         "@src": resolve('./src'),
