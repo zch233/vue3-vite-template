@@ -3,7 +3,6 @@ import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import * as path from 'path';
 import { createHtmlPlugin } from 'vite-plugin-html';
-import viteRestart from 'vite-plugin-restart'
 import viteCompression from 'vite-plugin-compression';
 import viteImagemin from 'vite-plugin-imagemin';
 import visualizer from 'rollup-plugin-visualizer';
@@ -27,12 +26,6 @@ export default ({mode, command}: ConfigEnv):UserConfig => {
             title: VITE_APP_TITLE,
           },
         },
-      }),
-      viteRestart({
-        restart: [
-          '*.config.[jt]s',
-          '**/config/*.[jt]s'
-        ]
       }),
     ]
     const seeVisualizer = false // 如果要看打包后的分析

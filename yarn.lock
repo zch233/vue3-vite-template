@@ -3692,13 +3692,6 @@ vite-plugin-imagemin@^0.6.1:
     jpegtran-bin "^6.0.1"
     pathe "^0.2.0"
 
-vite-plugin-restart@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.npmmirror.com/vite-plugin-restart/-/vite-plugin-restart-0.1.1.tgz#2a926442d9ba675f2a29477c113f53bf464da02d"
-  integrity sha512-kBxOqRrdbjVmC0PiT2KNXZogpgqA2epMkny//VjWnOS2k9NV/vXA7PYgf8/1lmBCZsC+iMj1C1ODuAR/9Sig4A==
-  dependencies:
-    micromatch "^4.0.4"
-
 vite@^2.8.0:
   version "2.8.4"
   resolved "https://registry.npmmirror.com/vite/-/vite-2.8.4.tgz#4e52a534289b7b4e94e646df2fc5556ceaa7336b"
