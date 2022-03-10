@@ -6,6 +6,7 @@ import { createHtmlPlugin } from 'vite-plugin-html';
 import viteCompression from 'vite-plugin-compression';
 import viteImagemin from 'vite-plugin-imagemin';
 import visualizer from 'rollup-plugin-visualizer';
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 
 const resolve = (dir: string) => path.resolve(__dirname, dir)
 
@@ -29,6 +30,13 @@ export default ({mode, command}: ConfigEnv):UserConfig => {
           },
         },
       }),
+      createSvgIconsPlugin({
+        // 指定需要缓存的图标文件夹
+        iconDirs: [resolve('src/assets/svg')],
+        // 指定symbolId格式
+        symbolId: 'icon-[dir]-[name]',
+        svgoOptions: isBuild,
+      })
     ]
     const seeVisualizer = false // 如果要看打包后的分析
     if (seeVisualizer) {
@@ -102,7 +110,7 @@ export default ({mode, command}: ConfigEnv):UserConfig => {
       },
     },
     server: {
-      port: 11224,
+      port: 11225,
       host: true,
       proxy: {
         [VITE_APP_API_URL]: {
