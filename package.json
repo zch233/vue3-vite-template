@@ -23,7 +23,8 @@
     "vite-plugin-html": "^3.0.6",
     "vite-plugin-imagemin": "^0.6.1",
     "vite-plugin-svg-icons": "^2.0.1",
-    "vue-tsc": "^0.29.8"
+    "vue-tsc": "^0.29.8",
+    "vue3-styled-components": "^1.2.1"
   },
   "resolutions": {
     "bin-wrapper": "npm:bin-wrapper-china"
