@@ -15,6 +15,8 @@ export default ({mode, command}: ConfigEnv):UserConfig => {
   const isBuild = command === 'build';
   const createVitePlugins = () => {
     // https://github.com/vitejs/awesome-vite#plugins
+    // @vitejs/plugin-legacy
+    // vite-plugin-pages
     const plugins = [
       vue(),
       vueJsx(),
