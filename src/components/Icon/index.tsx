@@ -1,5 +1,5 @@
 import { defineComponent } from 'vue';
-import { Svg } from '@src/components/Icon/style';
+import './style.less'
 
 export default defineComponent({
   name: 'Icon',
@@ -11,9 +11,9 @@ export default defineComponent({
   },
   setup(props) {
     return () => (
-      <Svg aria-hidden='true'>
+      <svg class='gupoIcon' aria-hidden='true'>
         <use xlinkHref={`#icon-${props.icon}`} />
-      </Svg>
+      </svg>
     );
   },
 });

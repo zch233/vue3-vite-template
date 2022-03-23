@@ -1,28 +1,14 @@
 import { defineComponent } from 'vue';
-import Exit from '@src/components/Exit';
-import styled from 'vue3-styled-components';
-import logo from './assets/logo.png'
-import Icon from '@src/components/Icon';
-
-const Wrapper = styled.div`
-  text-align: center;
-`
+import {RouterLink, RouterView} from 'vue-router'
 
 export default defineComponent({
-  name: 'Icon',
-  props: {
-    icon: {
-      type: String,
-      required: true,
-    },
-  },
+  name: 'App',
   setup(props) {
     return () => (
-      <Wrapper>
-        <Icon icon={'empty'} />
-        <Exit />
-        <img alt="Vue logo" src={logo} />
-      </Wrapper>
+      <div>
+        <p><RouterLink to={'/'}>Home </RouterLink>|<RouterLink to={'/about'}> About </RouterLink>|<RouterLink to={'/homeAgain'}> HomeAgain</RouterLink></p>
+        <RouterView />
+      </div>
     )
   },
 });
