@@ -3,10 +3,16 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
+    "serve": "vite",
+    "serve:stage": "vite serve --mode staging",
+    "serve:prod": "vite serve --mode production",
     "build": "vite build",
+    "build:stage": "vite build --mode staging",
+    "build:prod": "vite build --mode production",
     "preview": "yarn build && vite preview",
-    "type:check": "vue-tsc --noEmit --skipLibCheck"
+    "type:check": "vue-tsc --noEmit --skipLibCheck",
+    "deploy": "gupo-deploy --mode staging -p",
+    "deploy:prod": "gupo-deploy --mode production -p"
   },
   "dependencies": {
     "pinia": "^2.0.12",
@@ -18,6 +24,7 @@
     "@vitejs/plugin-vue": "^2.2.0",
     "@vitejs/plugin-vue-jsx": "^1.3.7",
     "autoprefixer": "^10.4.2",
+    "gupo-deploy": "1.0.9",
     "less": "^4.1.2",
     "rollup-plugin-visualizer": "^5.5.4",
     "typescript": "^4.5.4",

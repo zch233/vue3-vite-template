@@ -2308,6 +2308,11 @@ graceful-fs@^4.1.10, graceful-fs@^4.1.2, graceful-fs@^4.1.6, graceful-fs@^4.2.0,
   resolved "https://registry.npmmirror.com/graceful-fs/-/graceful-fs-4.2.9.tgz#041b05df45755e587a24942279b9d113146e1c96"
   integrity sha512-NtNxqUcXgpW2iMrfqSfR73Glt39K+BLwWsPs94yR63v45T0Wbej7eRmL5cWfwEgqXnmjQp3zaJTshdRW/qC2ZQ==
 
+gupo-deploy@1.0.9:
+  version "1.0.9"
+  resolved "https://registry.npmjs.org/gupo-deploy/-/gupo-deploy-1.0.9.tgz#07e092626e1006b23946ed3ea9c5a10d8abe4c34"
+  integrity sha512-UZUmSZdVpB8K076IbXQh7oIfer0dPPI+viMQCpFFfYASEYgsf4j7MGIybczd5ocorIeQzd/VimiPY6CYZFze3g==
+
 has-ansi@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npmmirror.com/has-ansi/-/has-ansi-2.0.0.tgz#34f5049ce1ecdf2b0649af3ef24e45ed35416d91"
@@ -3410,8 +3415,6 @@ npm-run-path@^2.0.0:
   version "2.0.2"
   resolved "https://registry.npmmirror.com/npm-run-path/-/npm-run-path-2.0.2.tgz#35a9232dfa35d7067b4cb2ddf2357b1871536c5f"
   integrity sha512-lJxZYlT4DW/bRUtFh1MQIWqmLwQfAxnqWG4HhEdjMlkrJYnJn0Jrr2u3mgxqaWsdiBc76TYkTG/mhrnYTuzfHw==
-  dependencies:
-    path-key "^2.0.0"
 
 npm-run-path@^4.0.0, npm-run-path@^4.0.1:
   version "4.0.1"
