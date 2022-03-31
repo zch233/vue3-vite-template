@@ -16,8 +16,10 @@ export default ({mode, command}: ConfigEnv):UserConfig => {
   const isBuild = command === 'build';
   const createVitePlugins = () => {
     // https://github.com/vitejs/awesome-vite#plugins
-    // @vitejs/plugin-legacy
-    // vite-plugin-pages
+    // @vitejs/plugin-legacy // 低版本浏览器兼容
+    // vite-plugin-pages // 自动根据目录生成路由
+    // unplugin-vue-components // 组件自动按需导入
+    // unplugin-auto-import // 依赖按需自动导入
     const plugins = [
       vue(),
       vueJsx(),
@@ -106,6 +108,9 @@ export default ({mode, command}: ConfigEnv):UserConfig => {
       rollupOptions: {
         // 确保外部化处理那些你不想打包进库的依赖
         external: [],
+        output: {
+          manualChunks: {}
+        }
         // https://rollupjs.org/guide/en/#big-list-of-options
       },
     },
