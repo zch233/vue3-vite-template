@@ -13,11 +13,11 @@
     "lib": ["esnext", "dom"],
     "types": ["vite/client"],
     "paths": {
-      "@src/*": [
-        "src/*"
-      ]
+      "@src/*": ["src/*"],
+      "#types/*": ["types/*"]
+
     }
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "**/*.ts", "**/*.md"],
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "types/**/*.d.ts", "**/*.ts", "**/*.md"],
   "exclude": ["node_modules", "dist", "**/*.js"]
 }
