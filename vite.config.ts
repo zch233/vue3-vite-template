@@ -117,14 +117,6 @@ export default ({mode, command}: ConfigEnv):UserConfig => {
     server: {
       port: 11225,
       host: true,
-      proxy: {
-        [VITE_APP_API_URL]: {
-          target: VITE_APP_API_URL_PROXY,
-          changeOrigin: true,
-          ws: true,
-          rewrite: (path) => path.replace(new RegExp(`^${VITE_APP_API_URL}`), ''),
-        },
-      },
     },
   }
 }
