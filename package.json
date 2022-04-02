@@ -18,7 +18,9 @@
     "lint:eslint": "eslint --cache --max-warnings 0 src --fix --ext .ts,.tsx,.vue,.js,.jsx",
     "lint:ls-lint": "ls-lint",
     "commit": "git-cz",
-    "pre-commit:pretty": "pretty-quick --staged"
+    "pre-commit:pretty": "pretty-quick --staged",
+    "pre-commit:lint-staged": "lint-staged",
+    "prepare": "husky install"
   },
   "dependencies": {
     "pinia": "2.0.12",
@@ -45,7 +47,9 @@
     "eslint-plugin-prettier": "4.0.0",
     "eslint-plugin-vue": "8.5.0",
     "gupo-deploy": "1.0.9",
+    "husky": "^7.0.0",
     "less": "4.1.2",
+    "lint-staged": "12.3.7",
     "postcss-html": "1.3.0",
     "postcss-less": "6.0.0",
     "prettier": "2.6.1",

@@ -1,0 +1,9 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+. "$(dirname "$0")/common.sh"
+
+npm run lint:ls-lint # 检查文件名称是否规范
+
+npm run pre-commit:lint-staged # 一些操作包括 eslint、stylelint 等等 lint-staged.config.js
+
+npm run pre-commit:pretty # 格式化代码
