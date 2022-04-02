@@ -23,6 +23,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "axios": "0.26.1",
     "pinia": "2.0.12",
     "vue": "3.2.31",
     "vue-router": "4.0.14"
