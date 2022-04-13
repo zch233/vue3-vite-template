@@ -1,4 +1,4 @@
-import { defineStore } from "pinia";
+import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
 
 // export const useUser = defineStore({
@@ -20,17 +20,25 @@ import { computed, ref } from 'vue';
 // });
 
 // 第二种写法
-export const useUser = defineStore('user', () => {
-  const name = ref('from pinia userName')
-  const nickname = ref('from pinia nickname')
-  const fullName = computed(() => name.value + nickname.value)
-  const changeName = () =>  {
-    name.value = 'changeName userName'
-  }
-  return {
-    name,
-    nickname,
-    fullName,
-    changeName,
-  }
-});
+export const useUser = defineStore(
+    'user',
+    () => {
+        const name = ref('from pinia userName');
+        const nickname = ref('from pinia nickname');
+        const fullName = computed(() => name.value + nickname.value);
+        const changeName = () => {
+            name.value = 'changeName userName';
+        };
+        return {
+            name,
+            nickname,
+            fullName,
+            changeName,
+        };
+    },
+    {
+        persist: {
+            // paths: ['token'] // 需要持久化的数据
+        },
+    }
+);
