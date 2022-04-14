@@ -1,4 +1,5 @@
-const { defineConfig } = require('eslint-define-config')
+/* eslint-disable */
+const { defineConfig } = require('eslint-define-config');
 
 module.exports = defineConfig({
     root: true,
@@ -8,12 +9,7 @@ module.exports = defineConfig({
         es6: true,
     },
     parser: 'vue-eslint-parser',
-    extends: [
-        'plugin:vue/vue3-recommended',
-        'plugin:@typescript-eslint/recommended',
-        'prettier',
-        'plugin:prettier/recommended',
-    ],
+    extends: ['plugin:vue/vue3-recommended', 'plugin:@typescript-eslint/recommended', 'prettier', 'plugin:prettier/recommended'],
     parserOptions: {
         parser: '@typescript-eslint/parser',
         ecmaVersion: 2020,
