@@ -1,128 +1,18 @@
 import { UserConfig, ConfigEnv, loadEnv } from 'vite';
-import vue from '@vitejs/plugin-vue';
-import vueJsx from '@vitejs/plugin-vue-jsx';
-import * as path from 'path';
-import { createHtmlPlugin } from 'vite-plugin-html';
-import viteCompression from 'vite-plugin-compression';
-import viteImagemin from 'vite-plugin-imagemin';
-import visualizer from 'rollup-plugin-visualizer';
-import viteLegacy from '@vitejs/plugin-legacy';
-import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
+import path from 'path';
 import { wrapperEnv } from './config/utils';
+import { createVitePlugins } from './config/vite/plugins';
 
 const resolve = (dir: string) => path.resolve(__dirname, dir);
 
 // https://vitejs.dev/config/
-export default ({ mode, command }: ConfigEnv): UserConfig => {
-    const {
-        VITE_APP_TITLE,
-        VITE_PORT,
-        VITE_PUBLIC_PATH,
-        VITE_BUILD_COMPRESS,
-        VITE_BUILD_COMPRESS_DELETE_ORIGIN_FILE,
-        VITE_LEGACY,
-        VITE_USE_IMAGEMIN,
-        VITE_DROP_CONSOLE,
-        VITE_DROP_DEBUG,
-    } = wrapperEnv(loadEnv(mode, process.cwd()));
-    const isBuild = command === 'build';
-    const createVitePlugins = () => {
-        // https://github.com/vitejs/awesome-vite#plugins
-        // vite-plugin-pages // 自动根据目录生成路由
-        // unplugin-vue-components // 组件自动按需导入
-        // unplugin-auto-import // 依赖按需自动导入
-        const plugins = [
-            vue(),
-            vueJsx(),
-            createHtmlPlugin({
-                minify: isBuild,
-                inject: {
-                    // Inject data into ejs template
-                    data: {
-                        title: VITE_APP_TITLE,
-                    },
-                },
-            }),
-            createSvgIconsPlugin({
-                // 指定需要缓存的图标文件夹
-                iconDirs: [resolve('src/assets/svg')],
-                // 指定symbolId格式
-                symbolId: 'icon-[dir]-[name]',
-                svgoOptions: isBuild,
-            }),
-        ];
-        const seeVisualizer = false; // 如果要看打包后的分析
-        if (seeVisualizer) {
-            plugins.push(
-                visualizer({
-                    filename: './node_modules/.cache/visualizer/stats.html',
-                    open: true,
-                    gzipSize: true,
-                    brotliSize: true,
-                })
-            );
-        }
-        if (isBuild) {
-            const compressList = VITE_BUILD_COMPRESS.split(',');
-            const deleteOriginFile = VITE_BUILD_COMPRESS_DELETE_ORIGIN_FILE;
-            if (compressList.includes('gzip')) {
-                plugins.push(
-                    viteCompression({
-                        ext: '.gz',
-                        deleteOriginFile,
-                    })
-                );
-            }
-            if (compressList.includes('brotli')) {
-                plugins.push(
-                    viteCompression({
-                        ext: '.br',
-                        algorithm: 'brotliCompress',
-                        deleteOriginFile,
-                    })
-                );
-            }
-            if (VITE_LEGACY) {
-                plugins.push(viteLegacy());
-            }
-            if (VITE_USE_IMAGEMIN) {
-                plugins.push(
-                    viteImagemin({
-                        gifsicle: {
-                            optimizationLevel: 7,
-                            interlaced: false,
-                        },
-                        optipng: {
-                            optimizationLevel: 7,
-                        },
-                        mozjpeg: {
-                            quality: 20,
-                        },
-                        pngquant: {
-                            quality: [0.8, 0.9],
-                            speed: 4,
-                        },
-                        svgo: {
-                            plugins: [
-                                {
-                                    name: 'removeViewBox',
-                                },
-                                {
-                                    name: 'removeEmptyAttrs',
-                                    active: false,
-                                },
-                            ],
-                        },
-                    })
-                );
-            }
-        }
-        return plugins;
-    };
+export default (configEnv: ConfigEnv): UserConfig => {
+    const viteEnv = wrapperEnv(loadEnv(configEnv.mode, process.cwd()));
+    const { VITE_PORT, VITE_PUBLIC_PATH, VITE_DROP_CONSOLE, VITE_DROP_DEBUG, VITE_LISTEN_HTTPS } = viteEnv;
     return {
         base: VITE_PUBLIC_PATH,
         root: process.cwd(),
-        plugins: createVitePlugins(),
+        plugins: createVitePlugins(configEnv, viteEnv),
         resolve: {
             alias: {
                 '@src': resolve('./src'),
@@ -156,6 +46,7 @@ export default ({ mode, command }: ConfigEnv): UserConfig => {
             },
         },
         server: {
+            https: VITE_LISTEN_HTTPS,
             port: VITE_PORT,
             host: true,
         },
