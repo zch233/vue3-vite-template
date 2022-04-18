@@ -3,7 +3,8 @@ import { router } from '@src/router';
 import { useUser } from '@src/store/modules/user';
 
 interface CustomAxiosRequestConfig extends AxiosRequestConfig {
-    banRepeatCancel?: boolean;
+    // 是否可以进行多次请求
+    multiple?: boolean;
 }
 
 interface CustomAxiosInstance extends AxiosInstance {
@@ -11,7 +12,6 @@ interface CustomAxiosInstance extends AxiosInstance {
     (url: string, config?: CustomAxiosRequestConfig): AxiosPromise;
 }
 
-const user = useUser();
 export const request: CustomAxiosInstance = axios.create({
     baseURL: import.meta.env.VITE_APP_API_URL,
     timeout: 120 * 1000,
@@ -59,11 +59,12 @@ export const clearPending = () => {
 
 request.interceptors.request.use(
     (config: CustomAxiosRequestConfig) => {
+        const user = useUser();
         const token = user.name;
         if (token) {
             (config.headers?.common as any)['Authorization'] = token;
         }
-        if (!config.banRepeatCancel) removePending(config); // 在请求开始前，对之前的请求做检查取消操作
+        if (!config.multiple) removePending(config); // 在请求开始前，对之前的请求做检查取消操作
         addPending(config); // 将当前请求添加到 pending 中
         return config;
     },

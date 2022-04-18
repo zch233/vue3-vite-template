@@ -4,5 +4,5 @@ export const getUser = () =>
     request({
         url: '/admin/getmemberinfo',
         method: 'post',
-        banRepeatCancel: false,
+        multiple: false,
     });
