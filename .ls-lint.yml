@@ -1,3 +1,10 @@
+# regex --- 匹配正则表达式模式：^ {pattern} $
+# lowercase --- 每个字母必须小写 忽略非字母
+# camelcase --- 字符串必须为camelCase 只允许使用字母和数字
+# pascalcase --- 字符串必须为Pascalcase 只允许使用字母和数字
+# snakecase --- 字符串必须为snake_case 只允许使用小写字母，数字和_
+# kebabcase --- 字符串必须为kebab-case 仅小写字母，数字和-允许
+# pointcase --- 字符串必须为“小写” 仅小写字母，数字和.允许的
 ls:
     src/*:
         .js: kebab-case | PascalCase | camelCase
@@ -8,7 +15,7 @@ ls:
         .mock.ts: kebab-case | camelCase
         .data.ts: kebab-case | camelCase
         .test-d.ts: kebab-case
-        .less: kebab-case | camelCase
+        .less: kebab-case | camelCase | pointcase
         .spec.ts: camelCase | PascalCase
 
 ignore:
