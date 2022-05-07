@@ -5,7 +5,7 @@ module.exports = {
         'eslint --fix',
         'prettier --write',
     ],
-    '{!(package)*.json,*.code-snippets,.!(browserslist)*rc}': ['prettier --write--parser json'], // prettier 一些额外格式的文件
+    '{!(package)*.json,*.code-snippets,.!(browserslist)*rc}': ['prettier --write --parser json'], // prettier 一些额外格式的文件
     'package.json': ['prettier --write'], // prettier package.json
     '*.vue': [
         // 修复 vue 文件
