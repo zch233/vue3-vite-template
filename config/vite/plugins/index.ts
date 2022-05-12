@@ -20,7 +20,7 @@ export const createVitePlugins = ({ mode, command }: ConfigEnv, viteEnv: ViteEnv
     // https://github.com/vitejs/awesome-vite#plugins
     // vite-plugin-pages // 自动根据目录生成路由
     const plugins = [
-        configPluginVue(),
+        configPluginVue(viteEnv),
         configPluginVueJsx(),
         configPluginVueSetupExtend(), // 支持在 setup 上使用组件 name
         configPluginHtml(isBuild, viteEnv),
