@@ -1,7 +1,7 @@
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
 import path from 'path';
 
-const resolve = (dir: string) => path.resolve(__dirname, dir);
+const resolve = (dir: string) => path.resolve(process.cwd(), dir);
 
 export const configSvgIconsPlugin = (isBuild: boolean) =>
     createSvgIconsPlugin({
