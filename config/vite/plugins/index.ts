@@ -21,7 +21,7 @@ export const createVitePlugins = ({ mode, command }: ConfigEnv, viteEnv: ViteEnv
     const plugins = [
         vue(),
         vueJsx(),
-        // support name
+        // 支持在 setup 上使用组件 name
         vueSetupExtend(),
         configPluginHtml(isBuild, viteEnv),
         configSvgIconsPlugin(isBuild),
