@@ -40,7 +40,7 @@ declare global {
     interface ImportMetaEnv extends ViteEnv {
         __: unknown;
     }
-
+    type ViteEnv_VITE_UNPLUGINS_COMPONENTS = 'VueUseComponents' | 'ElementPlus' | 'NaiveUi' | 'Vant' | 'AntDesign' | 'Arco' | 'DevUi' | 'ElementUi' | 'HeadlessUi' | 'Idux' | 'Inkline' | 'LayuiVue' | 'PrimeVue' | 'Quasar' | 'TDesign' | 'Varlet' | 'Veui' | 'Vuetify3' | 'Vuetify'
     interface ViteEnv {
         VITE_APP_TITLE: string;
         VITE_APP_TAG: string;
@@ -58,6 +58,8 @@ declare global {
         VITE_BUILD_COMPRESS_DELETE_ORIGIN_FILE: boolean;
         VITE_LEGACY: boolean;
         VITE_USE_IMAGEMIN: boolean;
+        VITE_UNPLUGINS_COMPONENTS: ViteEnv_VITE_UNPLUGINS_COMPONENTS;
+        VITE_UNPLUGINS_IMPORTS: boolean;
     }
 
     function parseInt(s: string | number, radix?: number): number;

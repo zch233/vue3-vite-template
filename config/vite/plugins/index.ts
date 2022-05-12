@@ -10,22 +10,26 @@ import { configPluginCompression } from './vitePluginCompression';
 import { configPluginWindicss } from './vitePluginWindicss';
 import { configPluginCertificate } from './vitePluginMkcert';
 import vueSetupExtend from 'vite-plugin-vue-setup-extend';
+import { configPluginUnpluginComponents } from './unpluginVueComponents';
+import { configPluginUnpluginImport } from './unpluginAutoImport';
 
 export const createVitePlugins = ({ mode, command }: ConfigEnv, viteEnv: ViteEnv) => {
     const isBuild = command === 'build';
-    const { VITE_WINDICSS, VITE_SEE_VISUALIZER, VITE_LEGACY, VITE_USE_IMAGEMIN, VITE_LISTEN_HTTPS } = viteEnv;
+    const { VITE_WINDICSS, VITE_SEE_VISUALIZER, VITE_LEGACY, VITE_USE_IMAGEMIN, VITE_LISTEN_HTTPS, VITE_UNPLUGINS_COMPONENTS, VITE_UNPLUGINS_IMPORTS } = viteEnv;
     // https://github.com/vitejs/awesome-vite#plugins
     // vite-plugin-pages // 自动根据目录生成路由
-    // unplugin-vue-components // 组件自动按需导入
     // unplugin-auto-import // 依赖按需自动导入
     const plugins = [
         vue(),
         vueJsx(),
-        // 支持在 setup 上使用组件 name
-        vueSetupExtend(),
+        vueSetupExtend(), // 支持在 setup 上使用组件 name
         configPluginHtml(isBuild, viteEnv),
         configSvgIconsPlugin(isBuild),
     ];
+
+    if (VITE_UNPLUGINS_COMPONENTS) plugins.push(configPluginUnpluginComponents(viteEnv))
+
+    if (VITE_UNPLUGINS_IMPORTS) plugins.push(configPluginUnpluginImport())
 
     if (VITE_LISTEN_HTTPS) plugins.push(configPluginCertificate());
 
