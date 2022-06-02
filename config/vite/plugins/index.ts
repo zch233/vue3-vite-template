@@ -4,7 +4,6 @@ import { ConfigEnv } from 'vite';
 import { configPluginHtml } from './vitePluginHtml';
 import { configSvgIconsPlugin } from './vitePluginSvgIcons';
 import { configPluginLegacy } from './vitePluginLegacy';
-import { configPluginImagemin } from './vitePluginImagemin';
 import { configPluginVisualizer } from './rollupPluginVisualizer';
 import { configPluginCompression } from './vitePluginCompression';
 import { configPluginWindicss } from './vitePluginWindicss';
@@ -40,7 +39,6 @@ export const createVitePlugins = ({ mode, command }: ConfigEnv, viteEnv: ViteEnv
     if (isBuild) {
         plugins.push(configPluginCompression(viteEnv));
         if (VITE_LEGACY) plugins.push(configPluginLegacy());
-        if (VITE_USE_IMAGEMIN) plugins.push(configPluginImagemin());
     }
     return plugins;
 };
