@@ -13,7 +13,7 @@ module.exports = {
         'prettier --write',
         'stylelint --fix',
     ],
-    '*.{scss,less,styl,css,html}': [
+    '*.{css,scss,sass,less,styl,html}': [
         // 修复样式文件
         'stylelint --fix',
         'prettier --write',
