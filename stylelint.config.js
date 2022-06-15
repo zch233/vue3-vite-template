@@ -200,7 +200,7 @@ module.exports = {
     ignoreFiles: ['**/*.js', '**/*.ts', '**/*.md'],
     overrides: [
         {
-            files: ['*.vue', '**/*.vue'],
+            files: ['*.vue', '**/*.vue', '*.html', '**/*.html'],
             extends: ['stylelint-config-recommended-vue', 'stylelint-config-html'],
             customSyntax: 'postcss-html',
             rules: {
